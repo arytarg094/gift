@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, user-scalable=yes, viewport-fit=cover">
 <title>A Story... About You</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
   button{ font-family: var(--font-ui); border:none; cursor:pointer; border-radius:999px; letter-spacing:0.5px; }
 
   @media (hover:hover) and (pointer:fine){
-    body{ cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="3" fill="%23FFD166"/><g stroke="%2368D8FF" stroke-width="1"><line x1="13" y1="2" x2="13" y2="9"/><line x1="13" y1="17" x2="13" y2="24"/><line x1="2" y1="13" x2="9" y2="13"/><line x1="17" y1="13" x2="24" y2="13"/><line x1="5" y1="5" x2="10" y2="10"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="21" y1="5" x2="16" y2="10"/><line x1="10" y1="16" x2="5" y2="21"/></g></svg>') 13 13, auto;
+    body{ cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="3" fill="%23FFD166"/><g stroke="%2368D8FF" stroke-width="1"><line x1="13" y1="2" x2="13" y2="9"/><line x1="13" y1="17" x2="13" y2="24"/><line x1="2" y1="13" x2="9" y2="13"/><line x1="17" y1="13" x2="24" y2="13"/><line x1="5" y1="5" x2="10" y2="10"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="21" y1="5" x2="16" y2="10"/><line x1="10" y1="16" x2="5" y2="21"/></g></svg>') 13 13, auto; }
   }
   .web-splat{
     position:fixed; width:10px; height:10px; border-radius:50%;
@@ -42,8 +42,8 @@
   }
   @keyframes splat{ 0%{opacity:0.9; width:6px; height:6px;} 100%{opacity:0; width:60px; height:60px;} }
 
-  /* ---------- fallback generated background (shows only if no photos configured) ---------- */
-  #skyLayer{ position:fixed; inset:0; z-index:0; overflow:hidden; }
+  /* ---------- background layers ---------- */
+  #skyLayer{ position:fixed; inset:0; z-index:0; overflow:hidden; width:100%; height:100dvh; }
   #stars{ position:absolute; inset:0; }
   .star{ position:absolute; background:var(--white); border-radius:50%; animation: twinkle ease-in-out infinite; }
   @keyframes twinkle{ 0%,100%{opacity:0.15;} 50%{opacity:0.9;} }
@@ -54,32 +54,32 @@
     animation: drift 60s linear infinite alternate;
   }
   @keyframes drift{ from{ transform:translateX(-46vw);} to{ transform:translateX(46vw);} }
-  .skyline{ position:absolute; bottom:0; left:0; width:100%; }
+  .skyline{ position:absolute; bottom:0; left:0; width:100%; height:auto; }
   .window{ animation: flicker 4s ease-in-out infinite; }
   @keyframes flicker{ 0%,100%{opacity:0.85;} 45%{opacity:0.2;} 55%{opacity:0.9;} }
 
   /* ---------- photo slideshow background ---------- */
-  #bgPhotoLayer{ position:fixed; inset:0; z-index:0; display:none; }
+  #bgPhotoLayer{ position:fixed; inset:0; z-index:0; display:none; width:100%; height:100dvh; overflow:hidden; }
   .bg-slide{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  opacity:0;
-  transition: opacity 1.8s ease;
-
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    opacity:0;
+    transition: opacity 1.8s ease;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
   .bg-slide.active{ opacity:1; }
   #bgOverlay{
     position:fixed; inset:0; z-index:1; pointer-events:none;
     background:
-      radial-gradient(ellipse at center, rgba(5,8,22,0.04) 0%, rgba(5,8,22,0.18) 65%, rgba(5,8,22,0.4) 100%),
-      linear-gradient(180deg, rgba(5,8,22,0.32) 0%, rgba(5,8,22,0.02) 28%, rgba(5,8,22,0.4) 100%);
+      radial-gradient(ellipse at center, rgba(5,8,22,0.1) 0%, rgba(5,8,22,0.3) 65%, rgba(5,8,22,0.6) 100%),
+      linear-gradient(180deg, rgba(5,8,22,0.4) 0%, rgba(5,8,22,0.02) 28%, rgba(5,8,22,0.6) 100%);
     display:none;
+    width:100%; height:100dvh;
   }
 
   /* ---------- snow + hearts ---------- */
@@ -93,7 +93,7 @@
     0%{ transform:translate(0,0) rotate(0deg); opacity:0;}
     8%{ opacity:0.9;}
     92%{ opacity:0.9;}
-    100%{ transform:translate(var(--dx,20px), calc(100vh - var(--land,6px))) rotate(180deg); opacity:0.85;}
+    100%{ transform:translate(var(--dx,20px), calc(100dvh - var(--land,6px))) rotate(180deg); opacity:0.85;}
   }
   #snowBed{
     position:fixed; left:0; right:0; bottom:0; height:16px; z-index:2; pointer-events:none;
@@ -106,49 +106,58 @@
   @keyframes heartFall{
     0%{ transform:translate(0,0) rotate(-8deg) scale(0.9); opacity:0;}
     10%{ opacity:0.95;}
-    100%{ transform:translate(var(--dx,30px), 112vh) rotate(12deg) scale(1); opacity:0.4;}
+    100%{ transform:translate(var(--dx,30px), 112dvh) rotate(12deg) scale(1); opacity:0.4;}
   }
 
-  .corner-web{ position:fixed; width:200px; height:200px; opacity:0.14; pointer-events:none; z-index:2; }
-  .corner-web.tl{ top:-24px; left:-24px; }
-  .corner-web.tr{ top:-24px; right:-24px; transform:scaleX(-1); }
+  .corner-web{ position:fixed; width:min(200px, 35vw); height:auto; opacity:0.14; pointer-events:none; z-index:2; }
+  .corner-web.tl{ top:-12px; left:-12px; }
+  .corner-web.tr{ top:-12px; right:-12px; transform:scaleX(-1); }
 
-  /* ---------- scenes ---------- */
+  /* ---------- scenes container layout ---------- */
   .scene{
     position:fixed; inset:0; z-index:4;
     display:flex; align-items:center; justify-content:center; flex-direction:column;
-    padding: max(28px, env(safe-area-inset-top)) 20px max(28px, env(safe-area-inset-bottom));
+    padding: calc(20px + env(safe-area-inset-top)) 20px calc(30px + env(safe-area-inset-bottom));
     text-align:center;
     opacity:0; pointer-events:none;
-    transform: scale(1.04);
+    transform: scale(1.02);
     filter: blur(6px);
-    transition: opacity 0.9s ease, transform 0.9s ease, filter 0.9s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
     height:100dvh; width:100%;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
   }
   .scene.active{ opacity:1; pointer-events:auto; transform:scale(1); filter:blur(0); z-index:5; }
-  .scene-inner{ width:100%; max-width:520px; display:flex; flex-direction:column; align-items:center; margin:auto; }
+  
+  /* Safe-alignment container for scrollable screens */
+  .scene-inner{ 
+    width:100%; 
+    max-width:520px; 
+    display:flex; 
+    flex-direction:column; 
+    align-items:center; 
+    margin: auto 0; /* Fallback for safe centering inside dynamic containers */
+  }
 
   .eyebrow{
     font-family: var(--font-ui); letter-spacing:3px; text-transform:uppercase;
-    font-size:12px; color:var(--skyblue); font-weight:600; margin-bottom:10px; opacity:0.9;
+    font-size:clamp(10px, 2.5vw, 12px); color:var(--skyblue); font-weight:600; margin-bottom:10px; opacity:0.9;
     text-shadow: 0 2px 10px rgba(0,0,0,0.7);
   }
 
   /* ---------- loader ---------- */
-  #scene-loader .display{ font-size:clamp(15px,3.6vw,18px); font-family: var(--font-ui); color:var(--skyblue); min-height:24px; margin-bottom:20px; letter-spacing:0.5px; }
+  #scene-loader .display{ font-size:clamp(14px,3.6vw,18px); font-family: var(--font-ui); color:var(--skyblue); min-height:24px; margin-bottom:20px; letter-spacing:0.5px; }
   .loader-bar{ width:220px; max-width:70vw; height:3px; background:rgba(255,255,255,0.12); border-radius:4px; overflow:hidden; }
   .loader-fill{ height:100%; width:0%; background: linear-gradient(90deg, var(--red), var(--gold)); transition: width 1.1s ease; }
   .heartbeat-line{ font-size:26px; margin-top:22px; opacity:0.7; animation: pulse 1.3s ease-in-out infinite; }
   @keyframes pulse{ 0%,100%{transform:scale(1); opacity:0.5;} 50%{transform:scale(1.2); opacity:1;} }
 
   /* ---------- landing ---------- */
-  #scene-landing h1{ font-size:clamp(30px,8vw,52px); line-height:1.15; }
-  #scene-landing .sub{ font-family: var(--font-letter); font-style:italic; font-size:clamp(16px,4vw,21px); color:var(--white); opacity:0.92; margin:14px 0 32px; text-shadow:0 2px 12px rgba(0,0,0,0.7); }
+  #scene-landing h1{ font-size:clamp(28px, 7.5vw, 52px); line-height:1.2; }
+  #scene-landing .sub{ font-family: var(--font-letter); font-style:italic; font-size:clamp(15px, 4vw, 21px); color:var(--white); opacity:0.92; margin:14px 0 32px; text-shadow:0 2px 12px rgba(0,0,0,0.7); }
   .glow-btn{
     background: linear-gradient(135deg, var(--red), #a01323);
-    color:white; font-size:clamp(14px,4vw,16px); font-weight:600; padding:15px 38px;
+    color:white; font-size:clamp(14px,3.8vw,16px); font-weight:600; padding:14px 36px;
     box-shadow: var(--shadow); border:1px solid rgba(255,255,255,0.25);
     animation: pulseGlow 2.4s ease-in-out infinite;
     min-height:48px;
@@ -160,150 +169,124 @@
 
   /* ---------- story ---------- */
   .note-card{
-    background: rgba(9,21,47,0.6);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(104,216,255,0.3);
-    border-radius:18px; padding:34px 28px;
+    background: rgba(9,21,47,0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(104,216,255,0.25);
+    border-radius:18px; padding: clamp(22px, 5vw, 34px) clamp(18px, 4vw, 28px);
     box-shadow: var(--shadow);
     width:100%;
     opacity:0; transform: translateY(14px);
     transition: opacity 0.5s ease, transform 0.5s ease;
-    min-height:130px; display:flex; flex-direction:column; justify-content:center;
+    min-height:140px; display:flex; flex-direction:column; justify-content:center;
     position:relative;
   }
   .note-card::before{
-    content:'“'; position:absolute; top:-4px; left:18px; font-family:'Cinzel',serif;
-    font-size:52px; color:var(--gold); opacity:0.35; line-height:1;
+    content:'“'; position:absolute; top:-6px; left:16px; font-family:'Cinzel',serif;
+    font-size:clamp(38px, 10vw, 52px); color:var(--gold); opacity:0.3; line-height:1;
   }
   .note-card.show{ opacity:1; transform:translateY(0); }
-  .note-emoji{ font-size:30px; margin-bottom:10px; }
-  .note-text{ font-family: var(--font-letter); font-style:italic; font-size:clamp(18px,4.8vw,23px); line-height:1.5; color:var(--white); min-height:1.5em; }
+  .note-emoji{ font-size:clamp(26px, 6vw, 32px); margin-bottom:10px; }
+  .note-text{ font-family: var(--font-letter); font-style:italic; font-size:clamp(17px, 4.5vw, 23px); line-height:1.5; color:var(--white); min-height:1.5em; }
   .note-text .cursor-blink{ opacity:1; animation: blink 0.8s step-end infinite; }
   @keyframes blink{ 50%{ opacity:0; } }
 
-  .story-nav{ margin-top:24px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:center; }
+  .story-nav{ margin-top:24px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:center; width:100%; }
   .btn-primary{
-    background: var(--red); color:white; padding:13px 26px; font-size:14px; font-weight:600;
+    background: var(--red); color:white; padding:12px 26px; font-size:14px; font-weight:600;
     box-shadow: 0 6px 20px rgba(215,38,56,0.4); min-height:44px;
   }
   .btn-ghost{ background:transparent; color:var(--white); padding:12px 14px; font-size:12px; opacity:0.6; font-weight:500; min-height:44px; }
-  .btn-primary:active, .btn-ghost:active{ transform:scale(0.95); }
+  .btn-primary:active, .btn-ghost:active{ transform:scale(0.96); }
 
   .narrator{
-    position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(120%);
-    background: rgba(255,209,102,0.14); border:1px solid rgba(255,209,102,0.45);
-    color: var(--gold); font-family: var(--font-ui); font-size:13px; font-weight:500;
-    padding:10px 18px; border-radius:999px; max-width:88vw; text-align:center;
+    position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(130%);
+    background: rgba(9, 21, 47, 0.9); border:1px solid rgba(255,209,102,0.5);
+    color: var(--gold); font-family: var(--font-ui); font-size:clamp(11px, 3vw, 13px); font-weight:500;
+    padding:10px 18px; border-radius:999px; max-width:88vw; width:max-content; text-align:center;
     transition: transform 0.5s cubic-bezier(.34,1.56,.64,1); z-index:20;
+    box-shadow: var(--shadow);
   }
   .narrator.show{ transform:translateX(-50%) translateY(0); }
 
   /* ---------- gallery ---------- */
-  #scene-gallery .scene-inner{ max-width:520px; }
   .gallery-video-wrap{
-    width:100%; margin: 8px 0 26px; border-radius:14px; overflow:hidden;
-    box-shadow: var(--shadow); background:#000; border:1px solid rgba(104,216,255,0.3);
+    width:100%; margin: 12px 0 24px; border-radius:14px; overflow:hidden;
+    box-shadow: var(--shadow); background:#000; border:1px solid rgba(104,216,255,0.25);
   }
   .gallery-video-wrap video{
-    width:100%; max-height:60vh; display:block; background:#000;
+    width:100%; max-height:45dvh; display:block; background:#000; object-fit: contain;
   }
 
   /* ---------- suspense ---------- */
-  #scene-suspense .tingle{ font-size:clamp(40px,10vw,52px); margin-bottom:14px; animation: tingle 1s ease-in-out infinite; }
+  #scene-suspense .tingle{ font-size:clamp(38px,9vw,52px); margin-bottom:14px; animation: tingle 1s ease-in-out infinite; }
   @keyframes tingle{ 0%,100%{transform:scale(1) rotate(0);} 25%{transform:scale(1.15) rotate(-6deg);} 75%{transform:scale(1.1) rotate(6deg);} }
-  #scene-suspense h2{ font-size:clamp(20px,5.2vw,28px); font-weight:500; font-style:italic; font-family: var(--font-letter); }
+  #scene-suspense h2{ font-size:clamp(20px,5vw,28px); font-weight:500; font-style:italic; font-family: var(--font-letter); }
 
   /* ---------- proposal ---------- */
-  #scene-question h1{ font-size:clamp(24px,7.6vw,42px); margin-bottom:22px; padding:0 6px; }
-  .taunt{ font-family: var(--font-ui); font-size:13px; font-weight:600; color:var(--gold); min-height:20px; margin-bottom:20px; text-shadow:0 2px 10px rgba(0,0,0,0.6); }
-  .btn-field{ position:relative; width:100%; max-width:380px; height:min(190px, 42vh); }
+  #scene-question h1{ font-size:clamp(22px, 6.5vw, 40px); margin-bottom:16px; padding:0 6px; line-height:1.25; }
+  .taunt{ font-family: var(--font-ui); font-size:12px; font-weight:600; color:var(--gold); min-height:20px; margin-bottom:15px; text-shadow:0 2px 10px rgba(0,0,0,0.6); }
+  .btn-field{ position:relative; width:100%; max-width:360px; height:200px; margin: 0 auto; }
+  
   #yesBtn{
     background: linear-gradient(135deg, var(--skyblue), #2f7fb0); color:#04101f; font-weight:700;
-    position:absolute; left:50%; top:60%; transform:translate(-50%,-50%) scale(var(--yes-scale,1));
-    padding:15px 30px; font-size:15px; box-shadow: 0 10px 30px rgba(104,216,255,0.45);
-    transition: transform 0.25s ease; z-index:3; border:1px solid rgba(255,255,255,0.4);
+    position:absolute; left:50%; top:55%; transform:translate(-50%,-50%) scale(var(--yes-scale,1));
+    padding:14px 28px; font-size:15px; box-shadow: 0 10px 30px rgba(104,216,255,0.45);
+    transition: transform 0.25s ease, left 0.1s, top 0.1s; z-index:3; border:1px solid rgba(255,255,255,0.4);
     white-space:nowrap;
   }
   #noBtn{
-    background: rgba(247,248,252,0.94); color:#1a1a1a; font-weight:600;
-    position:absolute; left:20%; top:20%; padding:14px 24px; font-size:13px;
-    transition: left 0.22s cubic-bezier(.4,0,.2,1), top 0.22s cubic-bezier(.4,0,.2,1);
-    z-index:2; border:1px solid rgba(0,0,0,0.06);
+    background: rgba(247,248,252,0.96); color:#1a1a1a; font-weight:600;
+    position:absolute; left:20%; top:15%; padding:12px 22px; font-size:13px;
+    transition: left 0.2s cubic-bezier(.4,0,.2,1), top 0.2s cubic-bezier(.4,0,.2,1);
+    z-index:2; border:1px solid rgba(0,0,0,0.1); border-radius:999px;
     white-space:nowrap;
   }
 
   /* ---------- celebration ---------- */
-  #scene-celebration h1{ font-size:clamp(26px,7vw,44px); margin-bottom:6px; padding:0 6px; }
-  #scene-celebration .sub{ font-family: var(--font-letter); font-style:italic; font-size:clamp(14px,4vw,16px); opacity:0.9; margin-bottom:22px; text-shadow:0 2px 12px rgba(0,0,0,0.7); }
-  .celeb-sparkle{ font-size:clamp(26px,7vw,32px); margin-bottom:8px; animation: sparklePulse 2.4s ease-in-out infinite; }
+  #scene-celebration h1{ font-size:clamp(24px, 6.5vw, 44px); margin-bottom:8px; padding:0 6px; color: var(--gold); }
+  #scene-celebration .sub{ font-family: var(--font-letter); font-style:italic; font-size:clamp(15px,4.2vw,18px); opacity:0.95; margin-bottom:22px; text-shadow:0 2px 12px rgba(0,0,0,0.7); padding: 0 10px; }
+  .celeb-sparkle{ font-size:clamp(26px,7vw,36px); margin-bottom:8px; animation: sparklePulse 2.4s ease-in-out infinite; }
   @keyframes sparklePulse{
     0%,100%{ transform: scale(1); opacity:0.85; }
-    50%{ transform: scale(1.18); opacity:1; }
+    50%{ transform: scale(1.15); opacity:1; }
   }
-  .final-polaroid{
-    background:#fdfdf8; color:#1a1a1a; padding:16px 16px 22px; border-radius:8px;
-    box-shadow: var(--shadow); width:min(200px, 55vw); transform: rotate(-3deg);
-    animation: dropIn 0.8s cubic-bezier(.34,1.56,.64,1) both; margin-bottom:18px;
-  }
-  @keyframes dropIn{ from{ transform: translateY(-60px) rotate(-3deg); opacity:0;} to{ transform: translateY(0) rotate(-3deg); opacity:1;} }
-  .final-polaroid .fp-frame{ width:100%; aspect-ratio:1/1; border-radius:4px; background:linear-gradient(135deg,#1a2544,#301419); display:flex; align-items:center; justify-content:center; font-size:30px;}
-  .final-polaroid .fp-cap{ font-family:'Cinzel',serif; font-size:13px; margin-top:10px; text-align:center; letter-spacing:0.5px; }
-  .tbc{ font-family: var(--font-ui); font-size:11px; letter-spacing:2px; opacity:0.5; text-transform:uppercase; margin-top:14px; text-shadow:0 2px 8px rgba(0,0,0,0.6); }
+  .tbc{ font-family: var(--font-ui); font-size:11px; letter-spacing:2px; opacity:0.5; text-transform:uppercase; margin-top:20px; text-shadow:0 2px 8px rgba(0,0,0,0.6); }
 
-  #confetti-layer{ position:fixed; inset:0; pointer-events:none; z-index:12; overflow:hidden; }
+  #confetti-layer{ position:fixed; inset:0; pointer-events:none; z-index:12; overflow:hidden; width:100%; height:100dvh; }
   .confetti-piece{ position:absolute; top:-20px; border-radius:2px; animation: fall linear forwards; }
-  @keyframes fall{ to{ transform: translateY(115vh) rotate(540deg); opacity:0.9; } }
+  @keyframes fall{ to{ transform: translateY(115dvh) rotate(540deg); opacity:0.9; } }
   .lantern{ position:absolute; bottom:-40px; font-size:22px; animation: floatLantern linear forwards; }
-  @keyframes floatLantern{ to{ transform:translateY(-120vh) translateX(var(--dx,0)); opacity:0; } }
+  @keyframes floatLantern{ to{ transform:translateY(-120dvh) translateX(var(--dx,0)); opacity:0; } }
 
   #musicToggle{
-    position:fixed; z-index:30; bottom: max(18px, env(safe-area-inset-bottom));
-    right: max(18px, env(safe-area-inset-right));
-    width:48px; height:48px; border-radius:50%;
-    background: rgba(9,21,47,0.8); border:1px solid rgba(104,216,255,0.4);
-    display:flex; align-items:center; justify-content:center; font-size:19px;
-    box-shadow: var(--shadow);
+    position:fixed; z-index:30; 
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    right: calc(16px + env(safe-area-inset-right));
+    width:44px; height:44px; border-radius:50%;
+    background: rgba(9,21,47,0.85); border:1px solid rgba(104,216,255,0.4);
+    display:flex; align-items:center; justify-content:center; font-size:18px;
+    box-shadow: var(--shadow); backdrop-filter: blur(4px);
   }
 
-  /* ---------- phone-specific fine tuning ---------- */
+  /* ---------- responsive mobile fine tuning ---------- */
   @media (max-width:480px){
-    .scene{ padding: max(20px, env(safe-area-inset-top)) 16px max(20px, env(safe-area-inset-bottom)); }
-    .note-card{ padding:24px 18px; border-radius:16px; }
-    .note-card::before{ font-size:40px; left:12px; }
-    .gallery-grid{ grid-template-columns: repeat(2,1fr); gap:10px; }
-    .polaroid{ padding:6px 6px 14px; }
-    .cap{ font-size:9px; }
-    .btn-field{ max-width:320px; }
-    #yesBtn{ padding:13px 24px; font-size:14px; }
-    #noBtn{ padding:12px 18px; font-size:12px; }
-    .final-polaroid{ padding:12px 12px 16px; }
-    .musicToggle, #musicToggle{ width:42px; height:42px; font-size:16px; }
-    .story-nav{ gap:10px; }
-    .gallery-grid{ grid-template-columns: repeat(2,1fr); gap:10px; }
-    .polaroid{ padding:6px 6px 14px; }
-    .cap{ font-size:9px; }
+    .scene{ padding: calc(15px + env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom)); }
+    .note-card{ border-radius:16px; }
+    .btn-field{ max-width:100%; height:180px; }
+    #yesBtn { padding: 12px 24px; }
+    #noBtn { padding: 10px 18px; }
+    #musicToggle { width:40px; height:40px; font-size:16px; }
   }
 
-  @media (max-width:360px){
-    .note-text{ font-size:17px; }
-    #scene-question h1{ font-size:22px; }
-    .btn-field{ max-width:280px; height:min(170px, 38vh); }
-  }
-
-  /* short/landscape phones: prevent vertical overflow of tall scenes */
-  @media (max-height:700px){
-    #scene-landing .sub{ margin:10px 0 22px; }
-    .note-card{ padding:20px 18px; min-height:110px; }
-    .gallery-grid{ margin:6px 0 18px; }
-    #scene-suspense .tingle{ margin-bottom:8px; }
-    .final-polaroid{ margin-bottom:10px; }
-  }
-
-  @media (max-height:560px){
-    .scene{ justify-content:flex-start; padding-top:max(16px, env(safe-area-inset-top)); }
-    .scene-inner{ margin:0 auto; }
-    .final-polaroid{ width:120px; }
-    .note-card{ min-height:90px; padding:16px 16px; }
+  /* short height phones fix */
+  @media (max-height:660px){
+    .scene{ justify-content: flex-start; }
+    .scene-inner { margin-top: 10px; margin-bottom: 20px; }
+    .gallery-video-wrap video { max-height: 35dvh; }
+    .btn-field { height: 150px; }
+    #yesBtn { top: 50%; }
+    #noBtn { top: 10%; }
   }
 </style>
 </head>
@@ -355,16 +338,12 @@
   </g>
 </svg>
 
-<!-- ============ CONFIG: EDIT YOUR CONTENT HERE ============ -->
 <script>
 const CONFIG = {
   herName: "My Baby",
   yourName: "Arya",
 
-  // Your own 6 images (Spider-Man & Gwen, or anything else). Put the file names/paths here —
-  // e.g. "spidey1.jpg" if the image sits in the same folder as this HTML, or a full image URL.
-  // They crossfade slowly in order 1→6, and the 6th one stays as the background for the rest of the site.
-  // Leave all six as "" to fall back to the built-in night skyline background instead.
+  // Your own 6 images (Spider-Man & Gwen, or anything else). Put the file names/paths here
   bgImages: [
     "image1.webp", // image 1
     "image2.jpg", // image 2
@@ -413,7 +392,7 @@ chapters: [
   ],
 
    galleryVideo: {
-    src: "video.mp4",   // yaha apni video ka filename/path daalo
+    src: "video.mp4",   
     caption: "Us, so far"
   },
 
@@ -425,8 +404,6 @@ suspenseLine: "One last thing...",
   musicVolume: 0.18
 };
 </script>
-<!-- ============ END CONFIG ============ -->
-
 <section class="scene active" id="scene-loader">
   <div class="scene-inner">
     <div class="display" id="loaderText">Connecting...</div>
@@ -461,7 +438,7 @@ suspenseLine: "One last thing...",
 <section class="scene" id="scene-gallery">
   <div class="scene-inner">
     <div class="eyebrow">burger ji</div>
-    <h2 style="font-size:clamp(22px,6vw,32px); margin-bottom:16px;">kha jau kya aapko</h2>
+    <h2 style="font-size:clamp(20px,5vw,28px); margin-bottom:12px;">kha jau kya aapko</h2>
     <div class="gallery-video-wrap">
       <video id="galleryVideo" controls playsinline preload="metadata"></video>
     </div>
@@ -491,7 +468,6 @@ suspenseLine: "One last thing...",
 <section class="scene" id="scene-celebration">
   <div class="scene-inner">
     <div class="celeb-sparkle">✨❤️✨</div>
-    
     <h1 id="celebTitle">THANK YOU SO MUCH BABYYYY❤️</h1>
     <div class="sub" id="celebSub">I will be a good boyfriend and I'll give you so much love.MWAHH</div>
     <div class="tbc">To be continued... </div>
@@ -508,7 +484,7 @@ document.getElementById('questionText').textContent = CONFIG.questionLine;
 document.getElementById('celebTitle').textContent = CONFIG.celebrationTitle;
 document.getElementById('celebSub').textContent = CONFIG.celebrationSub;
 
-/* ---------- background photo slideshow (or fallback skyline) ---------- */
+/* ---------- background photo slideshow ---------- */
 (function(){
   const slides = CONFIG.bgImages.filter(s => s && s.trim());
   if(slides.length){
@@ -530,13 +506,13 @@ document.getElementById('celebSub').textContent = CONFIG.celebrationSub;
         imgs[idx].classList.remove('active');
         idx++;
         imgs[idx].classList.add('active');
-        if(idx === slides.length - 1){ clearInterval(iv); } // hold on final image
+        if(idx === slides.length - 1){ clearInterval(iv); } 
       }, CONFIG.bgSlideDuration);
     }
   }
 })();
 
-/* ---------- stars (fallback background only) ---------- */
+/* ---------- stars ---------- */
 (function(){
   const box = document.getElementById('stars');
   for(let i=0;i<70;i++){
@@ -552,21 +528,20 @@ document.getElementById('celebSub').textContent = CONFIG.celebrationSub;
   }
 })();
 
-/* ---------- gentle continuous snow that piles up at the bottom ---------- */
+/* ---------- snow ---------- */
 const settledFlakes = [];
-const MAX_SETTLED = 180;
+const MAX_SETTLED = 120;
 function spawnSnow(){
   const el = document.createElement('div');
   el.className='snowflake';
-  const size = (2+Math.random()*4);
+  const size = (2+Math.random()*3);
   el.style.width = size+'px'; el.style.height = size+'px';
   el.style.left = Math.random()*100+'vw';
-  el.style.setProperty('--dx', (Math.random()*80-40)+'px');
+  el.style.setProperty('--dx', (Math.random()*60-30)+'px');
   el.style.setProperty('--land', (Math.random()*10+2)+'px');
-  const dur = (9+Math.random()*7);
+  const dur = (9+Math.random()*6);
   el.style.animationDuration = dur+'s';
   document.body.appendChild(el);
-  // once it lands, let it stay (accumulate) instead of removing it
   setTimeout(()=>{
     settledFlakes.push(el);
     if(settledFlakes.length > MAX_SETTLED){
@@ -575,29 +550,30 @@ function spawnSnow(){
     }
   }, dur*1000);
 }
-setInterval(spawnSnow, 260);
+setInterval(spawnSnow, 300);
 
-/* ---------- slow, sparse falling hearts ---------- */
+/* ---------- hearts ---------- */
 function spawnHeart(){
   const el = document.createElement('div');
   el.className='heart-fall';
   const hearts = ['💕','❤️','💗'];
   el.textContent = hearts[Math.floor(Math.random()*hearts.length)];
   el.style.left = Math.random()*100+'vw';
-  el.style.fontSize = (14+Math.random()*10)+'px';
-  el.style.setProperty('--dx', (Math.random()*60-30)+'px');
-  const dur = (11+Math.random()*7);
+  el.style.fontSize = (14+Math.random()*8)+'px';
+  el.style.setProperty('--dx', (Math.random()*50-25)+'px');
+  const dur = (11+Math.random()*6);
   el.style.animationDuration = dur+'s';
   document.body.appendChild(el);
   setTimeout(()=>el.remove(), dur*1000+300);
 }
 (function heartLoop(){
   spawnHeart();
-  setTimeout(heartLoop, 5000 + Math.random()*4000); // roughly every 5-9s, one at a time
+  setTimeout(heartLoop, 6000 + Math.random()*4000);
 })();
 
-/* ---------- web-splat click effect ---------- */
+/* ---------- web-splat ---------- */
 document.addEventListener('click', function(e){
+  if(e.target.tagName === 'BUTTON') return;
   const s = document.createElement('div');
   s.className='web-splat';
   s.style.left = e.clientX+'px'; s.style.top = e.clientY+'px';
@@ -605,7 +581,7 @@ document.addEventListener('click', function(e){
   setTimeout(()=>s.remove(), 500);
 });
 
-/* ---------- loader sequence ---------- */
+/* ---------- loader ---------- */
 (function(){
   const text = document.getElementById('loaderText');
   const fill = document.getElementById('loaderFill');
@@ -627,7 +603,9 @@ document.addEventListener('click', function(e){
 
 function goTo(id){
   document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  const target = document.getElementById(id);
+  target.classList.add('active');
+  target.scrollTop = 0;
 }
 
 function beginStory(){
@@ -708,6 +686,7 @@ function dodge(){
   const noBtn = document.getElementById('noBtn');
   const yesBtn = document.getElementById('yesBtn');
   const rect = noBtn.getBoundingClientRect();
+  
   const s = document.createElement('div');
   s.className='web-splat';
   s.style.left = (rect.left+rect.width/2)+'px'; s.style.top=(rect.top+rect.height/2)+'px';
@@ -715,15 +694,17 @@ function dodge(){
 
   const fw = field.clientWidth, fh = field.clientHeight;
   const bw = noBtn.offsetWidth, bh = noBtn.offsetHeight;
-  noBtn.style.left = (Math.random()*Math.max(fw-bw,10))+'px';
-  noBtn.style.top = (Math.random()*Math.max(fh-bh,10))+'px';
+  
+  // Confines the dodge coordinates safely inside bounds
+  noBtn.style.left = (Math.random()*Math.max(fw-bw, 20))+'px';
+  noBtn.style.top = (Math.random()*Math.max(fh-bh, 20))+'px';
 
   dodgeCount++;
   noBtn.textContent = taunts[Math.min(dodgeCount, taunts.length-1)];
   document.getElementById('taunt').textContent = dodgeCount>1 ? "he's not giving up though" : "";
-  const scale = Math.min(1 + dodgeCount*0.13, 2.3);
+  const scale = Math.min(1 + dodgeCount*0.12, 2.0);
   yesBtn.style.setProperty('--yes-scale', scale);
-  noBtn.style.fontSize = Math.max(13 - dodgeCount*0.5, 9)+'px';
+  noBtn.style.fontSize = Math.max(13 - dodgeCount*0.4, 10)+'px';
 }
 
 function sayYes(){
@@ -735,22 +716,22 @@ function sayYes(){
 function launchConfetti(){
   const layer = document.getElementById('confetti-layer');
   const colors = ['#D72638','#68D8FF','#FFD166','#F7F8FC'];
-  for(let i=0;i<100;i++){
+  for(let i=0;i<80;i++){
     const p = document.createElement('div');
     p.className='confetti-piece';
     p.style.left = Math.random()*100+'vw';
-    p.style.width = (6+Math.random()*6)+'px';
-    p.style.height = (10+Math.random()*10)+'px';
+    p.style.width = (6+Math.random()*5)+'px';
+    p.style.height = (10+Math.random()*8)+'px';
     p.style.background = colors[Math.floor(Math.random()*colors.length)];
     p.style.animationDuration = (2.6+Math.random()*2)+'s';
-    p.style.animationDelay = (Math.random()*1.3)+'s';
+    p.style.animationDelay = (Math.random()*1.2)+'s';
     layer.appendChild(p);
     setTimeout(()=>p.remove(), 5200);
   }
 }
 function launchLanterns(){
   const layer = document.getElementById('confetti-layer');
-  for(let i=0;i<10;i++){
+  for(let i=0;i<8;i++){
     const l = document.createElement('div');
     l.className='lantern'; l.textContent='🏮';
     l.style.left = (10+Math.random()*80)+'%';
